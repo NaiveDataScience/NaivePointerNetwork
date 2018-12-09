@@ -86,7 +86,7 @@ def evaluate_naive(model, test_x, test_y):
 
 def pipeline(shiyan, weight_size=256, dataset_size=2500, batch_size=100):
     input_seq_len = mapping[shiyan]
-    model = PointerNetwork(100, 1, input_seq_len)
+    model = PointerNetwork(1, input_seq_len)
     # model.train()
     optimizer = optim.Adam(model.parameters())
     train_X, train_Y = getdata(shiyan, dataset_size)
@@ -105,7 +105,7 @@ def pipeline(shiyan, weight_size=256, dataset_size=2500, batch_size=100):
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
-            torch.save(model, 'mytraining' + str(shiyan) + '.pkl')
+            torch.save(model, 'mytraininglstm' + str(shiyan) + '.pkl')
 
         if epoch % 10 == 0 and epoch != 0:
             print (epoch ,' \t loss is \t',loss.item())
@@ -118,6 +118,6 @@ def pipeline(shiyan, weight_size=256, dataset_size=2500, batch_size=100):
             evaluate_naive(model, train_x, train_y)
 
 if __name__ == '__main__':
-    for index in range(2, 4):
+    for index in range(3, 4):
         pipeline(index)
 
