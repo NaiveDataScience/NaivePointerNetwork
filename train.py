@@ -37,18 +37,16 @@ mapping = {
 
 
 def getdata(shiyan=1, batch_size=256):
+    senlen = mapping[shiyan]
     if shiyan == 1:
         high = 100
-        senlen = 5
         x = np.array([np.random.choice(range(high), senlen, replace=False) for _ in range(batch_size)])
         y = np.argsort(x)
     elif shiyan == 2:
         high = 100
-        senlen = 10
         x = np.array([np.random.choice(range(high), senlen, replace=False) for _ in range(batch_size)])
         y = np.argsort(x)
-    elif shiyan == 3 :
-        senlen = 5
+    elif shiyan == 3:
         x = np.array([np.random.random(senlen) for _ in range(batch_size)])
         y = np.argsort(x)
     return x,y
@@ -120,6 +118,6 @@ def pipeline(shiyan, weight_size=256, dataset_size=2500, batch_size=100):
             evaluate_naive(model, train_x, train_y)
 
 if __name__ == '__main__':
-    for index in range(1, 4):
+    for index in range(2, 4):
         pipeline(index)
 
